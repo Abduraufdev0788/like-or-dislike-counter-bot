@@ -42,21 +42,31 @@ def start1(update, context):
 
 def button_handler(update, context):
     query = update.callback_query
+    query.answer()
+
     user_id = query.from_user.id
     new_vote = query.data
 
-    if user_id in counter:
-        query.answer("Siz allaqachon ovoz bergansiz.", show_alert=True)
-        return
+    old_vote = counter.get(user_id) 
 
-    counter[user_id] = new_vote
-    query.answer("Ovozingiz qabul qilindi.")
+    if old_vote == "mydata":
+        counter["mydata"] -= 1
 
-    if new_vote == "mydata":
-        counter["mydata"] += 1
+    elif old_vote == "mydata2":
+        counter["mydata2"] -= 1
 
-    elif new_vote == "mydata2":
-        counter["mydata2"] += 1
+
+    if old_vote == new_vote:
+        del counter[user_id]
+
+    else:
+        counter[user_id] = new_vote
+
+        if new_vote == "mydata":
+            counter["mydata"] += 1
+
+        elif new_vote == "mydata2":
+            counter["mydata2"] += 1
 
 
     query.edit_message_text(

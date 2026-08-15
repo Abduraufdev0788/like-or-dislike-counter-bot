@@ -18,9 +18,6 @@ counter = {
     "like" : 0,
     "dislike": 0
 }
-
-# Bir foydalanuvchi faqat bir marta ovoz berishi mumkin.
-voted_users = set()
 def start0(update, context):
     key1 = InlineKeyboardButton(text='👍', callback_data='mydata')
 
@@ -44,14 +41,7 @@ def start1(update, context):
 
 def button_handler(update, context):
     query = update.callback_query
-    user_id = query.from_user.id
-
-    if user_id in voted_users:
-        query.answer("Siz allaqachon ovoz bergansiz.", show_alert=True)
-        return
-
-    voted_users.add(user_id)
-    query.answer("Ovozingiz qabul qilindi.")
+    query.answer()
 
     if query.data == "mydata":
         counter["like"] += 1

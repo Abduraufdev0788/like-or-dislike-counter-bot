@@ -76,9 +76,8 @@ def button_handler(update, context):
     query.answer(message)
 
     query.edit_message_text(
-        text="Ovoz berish yakunlandi.\n\n"
-             f"👍 Like: {counter['like']}\n"
-             f"👎 Dislike: {counter['dislike']}",
+        text="Ovoz berish yakunlandi",
+             
         reply_markup=keyboard
     )
 
